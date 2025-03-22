@@ -33,7 +33,7 @@ public class Server implements Runnable {
                 pool.execute(handler);
             }
             
-        } catch (IOException e) {
+        } catch (Exception e) {
             shutdown();
         }
         
@@ -50,6 +50,7 @@ public class Server implements Runnable {
     public void shutdown() {
         try {
             done = true;
+            pool.shutdown();
             if (server.isClosed()) {
                 server.close();
             }
